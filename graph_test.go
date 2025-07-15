@@ -2,14 +2,14 @@ package GoGraph
 
 import "testing"
 
-func setupTestGraph() Node {
+func setupTestGraph() *Node {
 	h := NewNode("h", nil)
-	f := NewNode("f", []Node{h})
-	e := NewNode("e", []Node{f})
-	d := NewNode("d", []Node{e})
-	c := NewNode("c", []Node{d})
-	b := NewNode("b", []Node{c})
-	a := NewNode("a", []Node{b, h})
+	f := NewNode("f", []*Node{h})
+	e := NewNode("e", []*Node{f})
+	d := NewNode("d", []*Node{e})
+	c := NewNode("c", []*Node{d})
+	b := NewNode("b", []*Node{c})
+	a := NewNode("a", []*Node{b, h})
 
 	return a
 }
