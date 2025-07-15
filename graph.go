@@ -19,9 +19,10 @@ func DepthFirstSearch(from *Node, to string) bool {
 		return true
 	}
 	for _, edge := range from.edges {
-		return DepthFirstSearch(edge, to)
+		if DepthFirstSearch(edge, to) {
+			return true
+		}
 	}
-
 	return false
 }
 
