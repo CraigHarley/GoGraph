@@ -14,17 +14,33 @@ type Node struct {
 	Value string
 }
 
-// DepthFirstSearch
-// todo - check for cycles (using visited map)
 func DepthFirstSearch(from *Node, to string) bool {
-	if from.Value == to {
+	visited := make(map[string]bool)
+
+	return dfs(from, to, visited)
+}
+
+func dfs(current *Node, target string, visited map[string]bool) bool {
+	if current == nil {
+		return false
+	}
+
+	if current.Value == target {
 		return true
 	}
-	for _, edge := range from.Edges {
-		if DepthFirstSearch(edge, to) {
+
+	if visited[current.Value] {
+		return false
+	}
+
+	visited[current.Value] = true
+
+	for _, edge := range current.Edges {
+		if dfs(edge, target, visited) {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -47,5 +63,6 @@ func BreadthFirstSearch(from *Node, to string) bool {
 
 		queue = append(queue, current.Edges...)
 	}
+
 	return false
 }

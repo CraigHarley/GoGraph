@@ -11,9 +11,12 @@ func setupTestGraph() *Node {
 	b := NewNode("b", []*Node{c})
 	a := NewNode("a", []*Node{b, h})
 
+	// Add Cycles
+	e.Edges = append(e.Edges, b) // e → b
+	c.Edges = append(c.Edges, a) // c → a
+
 	return a
 }
-
 func TestDepthFirstSearch(t *testing.T) {
 	root := setupTestGraph()
 
