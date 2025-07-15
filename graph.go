@@ -2,23 +2,25 @@ package GoGraph
 
 func NewNode(value string, edges []*Node) *Node {
 	n := Node{
-		edges: edges,
-		value: value,
+		Edges: edges,
+		Value: value,
 	}
 
 	return &n
 }
 
 type Node struct {
-	edges []*Node
-	value string
+	Edges []*Node
+	Value string
 }
 
+// DepthFirstSearch
+// todo - check for cycles (using visited map)
 func DepthFirstSearch(from *Node, to string) bool {
-	if from.value == to {
+	if from.Value == to {
 		return true
 	}
-	for _, edge := range from.edges {
+	for _, edge := range from.Edges {
 		if DepthFirstSearch(edge, to) {
 			return true
 		}
@@ -26,31 +28,24 @@ func DepthFirstSearch(from *Node, to string) bool {
 	return false
 }
 
-func unshift(queue []*Node) ([]*Node, *Node) {
-	current := queue[0]
-	queue = queue[1:]
-
-	return queue, current
-}
-
 func BreadthFirstSearch(from *Node, to string) bool {
 	visited := make(map[string]bool)
 	queue := []*Node{from}
 
-	var current *Node
 	for len(queue) > 0 {
-		queue, current = unshift(queue)
+		current := queue[0]
+		queue = queue[1:]
 
-		if visited[current.value] {
+		if visited[current.Value] {
 			continue
 		}
 
-		visited[current.value] = true
-		if current.value == to {
+		visited[current.Value] = true
+		if current.Value == to {
 			return true
 		}
 
-		queue = append(queue, current.edges...)
+		queue = append(queue, current.Edges...)
 	}
 	return false
 }
