@@ -21,10 +21,6 @@ func DepthFirstSearch(from *Node, to string) bool {
 }
 
 func dfs(current *Node, target string, visited map[string]bool) bool {
-	if current == nil {
-		return false
-	}
-
 	if current.Value == target {
 		return true
 	}
