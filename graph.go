@@ -1,18 +1,20 @@
 package GoGraph
 
-func NewNode(value string, edges []Node) Node {
-	return Node{
+func NewNode(value string, edges []*Node) *Node {
+	n := Node{
 		edges: edges,
 		value: value,
 	}
+
+	return &n
 }
 
 type Node struct {
-	edges []Node
+	edges []*Node
 	value string
 }
 
-func DepthFirstSearch(from Node, to string) bool {
+func DepthFirstSearch(from *Node, to string) bool {
 	if from.value == to {
 		return true
 	}
@@ -23,18 +25,18 @@ func DepthFirstSearch(from Node, to string) bool {
 	return false
 }
 
-func unshift(queue []Node) ([]Node, Node) {
+func unshift(queue []*Node) ([]*Node, *Node) {
 	current := queue[0]
 	queue = queue[1:]
 
 	return queue, current
 }
 
-func BreadthFirstSearch(from Node, to string) bool {
+func BreadthFirstSearch(from *Node, to string) bool {
 	visited := make(map[string]bool)
-	queue := []Node{from}
+	queue := []*Node{from}
 
-	var current Node
+	var current *Node
 	for len(queue) > 0 {
 		queue, current = unshift(queue)
 
