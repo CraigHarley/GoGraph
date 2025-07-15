@@ -49,9 +49,7 @@ func BreadthFirstSearch(from *Node, to string) bool {
 			return true
 		}
 
-		for _, neighbor := range current.edges {
-			queue = append(queue, neighbor)
-		}
+		queue = append(queue, current.edges...)
 	}
 	return false
 }
