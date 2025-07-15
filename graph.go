@@ -23,19 +23,26 @@ func DepthFirstSearch(from Node, to string) bool {
 	return false
 }
 
+func unshift(queue []Node) ([]Node, Node) {
+	current := queue[0]
+	queue = queue[1:]
+
+	return queue, current
+}
+
 func BreadthFirstSearch(from Node, to string) bool {
 	visited := make(map[string]bool)
 	queue := []Node{from}
 
+	var current Node
 	for len(queue) > 0 {
-		current := queue[0]
-		queue = queue[1:]
+		queue, current = unshift(queue)
 
 		if visited[current.value] {
 			continue
 		}
-		visited[current.value] = true
 
+		visited[current.value] = true
 		if current.value == to {
 			return true
 		}
