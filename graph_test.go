@@ -9,7 +9,7 @@ func setupTestGraph() *Node {
 	d := NewNode("d", []*Node{e})
 	c := NewNode("c", []*Node{d})
 	b := NewNode("b", []*Node{c})
-	a := NewNode("a", []*Node{b, h})
+	a := NewNode("a", []*Node{b})
 
 	// Add Cycles
 	e.Edges = append(e.Edges, b) // e → b
@@ -17,13 +17,16 @@ func setupTestGraph() *Node {
 
 	return a
 }
+
+type testCase struct {
+	target   string
+	expected bool
+}
+
 func TestDepthFirstSearch(t *testing.T) {
 	root := setupTestGraph()
 
-	tests := []struct {
-		target   string
-		expected bool
-	}{
+	tests := []testCase{
 		{"a", true},
 		{"h", true},
 		{"z", false},
@@ -40,10 +43,7 @@ func TestDepthFirstSearch(t *testing.T) {
 func TestBreadthFirstSearch(t *testing.T) {
 	root := setupTestGraph()
 
-	tests := []struct {
-		target   string
-		expected bool
-	}{
+	tests := []testCase{
 		{"a", true},
 		{"h", true},
 		{"z", false},
