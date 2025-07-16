@@ -4,3 +4,9 @@ This package provides a basic graph implementation in Go, along with two graph t
 
 - **Depth-First Search (DFS)**
 - **Breadth-First Search (BFS)**
+
+# HTML Coverage Report
+```bash
+# From root dir
+bash scripts/coverage.bash
+```
